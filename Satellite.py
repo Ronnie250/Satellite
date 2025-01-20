@@ -8,6 +8,7 @@ sats = []
 lines=[]
 next=0
 ts=10
+gameover=False
 
 for i in range(ts):
     satellite = Actor("satellite")
@@ -16,6 +17,7 @@ for i in range(ts):
     sats.append(satellite)
 
 def draw():
+    global gameover
     screen.blit("background", (0,0))
     numbers=1
     for i in sats:
@@ -24,7 +26,11 @@ def draw():
         numbers=numbers+1
     for line in lines:
         screen.draw.line(line[0],line[1],"red")
-        
+        if len(lines)==9:
+            gameover=True
+    if gameover == True:
+        screen.blit("background", (0,0))
+        screen.draw.text("YOU\nWIN", (220, 100), fontsize=200)
 
 def on_mouse_down(pos):
     global sats, lines, next
